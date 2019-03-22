@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.Simba.activity.Main3Activity">
+    <Button
+        android:id="@+id/toA"
+        android:text="跳转到组件A"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/toB"
+        android:text="跳转到组件B"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/show"
+        android:text="展示module1的framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        tools:ignore="MissingConstraints" />
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
+</LinearLayout>
