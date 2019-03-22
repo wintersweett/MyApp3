@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My App</string>
+    <string name="title_activity_basic">BasicActivity</string>
+    <string name="title_activity_agent_app">AgentApp</string>
 </resources>
