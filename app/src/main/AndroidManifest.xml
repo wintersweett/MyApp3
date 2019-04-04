@@ -26,6 +26,12 @@
         <activity android:name="com.Simba.activity.LackOfPermisionActivity">
         </activity>
         <activity android:name="com.Simba.activity.ReflectActivity"></activity>
+        <activity android:name="com.user.pluginlib.ProxyActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation">
+
+        </activity>
     </application>
 
 </manifest>

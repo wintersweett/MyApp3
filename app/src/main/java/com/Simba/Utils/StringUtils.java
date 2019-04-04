@@ -4,14 +4,56 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class StringUtils {
+    /**
+     * 模拟将assets下的文件 拷贝到app的缓存目录
+     * @param
+     * @return
+     */
+    public static String copyAssetsAndWrite(Context context,String fileName) {
+        File cacheDir=context.getCacheDir();
+        if (!cacheDir.exists()) {
+            cacheDir.mkdirs();
+        }
+        File outFile=new File(cacheDir,fileName);
+        if (!outFile.exists()) {
+            try {
+                boolean res=outFile.createNewFile();
+                if (res) {
+                    InputStream in=context.getAssets().open(fileName);
+                    FileOutputStream outputStream=new FileOutputStream(outFile);
+                    byte[] buffer=new byte[in.available()];
+                    int bytecount;
+                    while ((bytecount = in.read(buffer)) != -1) {
+                        outputStream.write(buffer,0,bytecount);
+                    }
+                    outputStream.flush();
+                    in.close();
+                    outputStream.close();
+                    Toast.makeText(context,"下载成功",Toast.LENGTH_SHORT).show();
+                    return outFile.getAbsolutePath();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(context,"文件已存在",Toast.LENGTH_SHORT).show();
+            return outFile.getAbsolutePath();
+
+        }
+        return null;
+
+    }
 
 
 //判断权限是否开启，true未开启，false开启了

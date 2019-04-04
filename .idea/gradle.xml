@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/baselibrary" />
             <option value="$PROJECT_DIR$/module1" />
             <option value="$PROJECT_DIR$/module2" />
+            <option value="$PROJECT_DIR$/pluginapk" />
+            <option value="$PROJECT_DIR$/pluginlib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
