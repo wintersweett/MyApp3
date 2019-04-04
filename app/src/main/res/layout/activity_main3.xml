@@ -25,15 +25,15 @@
         android:layout_height="48dp"
         tools:ignore="MissingConstraints" />
     <Button
-        android:id="@+id/download"
-        android:text="下载"
+        android:id="@+id/bt_loadapk"
         android:layout_width="match_parent"
-        android:layout_height="48dp" />
+        android:layout_height="48dp"
+        android:text="加载apk"/>
     <Button
-        android:id="@+id/toApk"
-        android:text="跳转到插件apk"
+        android:id="@+id/bt_tiaozhuan"
         android:layout_width="match_parent"
-        android:layout_height="48dp" />
+        android:layout_height="48dp"
+        android:text="跳转"/>
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
