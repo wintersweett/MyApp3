@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.Simba.activity.WaterFlowActivity"></activity>
         <activity android:name="com.Simba.activity.Main3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.Simba.activity.LackOfPermisionActivity">
-        </activity>
-        <activity android:name="com.Simba.activity.ReflectActivity"></activity>
+        <activity android:name="com.Simba.activity.LackOfPermisionActivity" />
+        <activity
+            android:name="com.Simba.activity.ManagementActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.Simba.activity.ReflectActivity" />
     </application>
 
 </manifest>
