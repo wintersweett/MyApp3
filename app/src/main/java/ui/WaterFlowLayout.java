@@ -32,30 +32,37 @@ public class WaterFlowLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int left,top,right,bottom;
-        //左边与上面需要累积
-        int curLeft=0;
-        int curTop=0;
-        for (int i=0;i<(listLineView.size()+1)/2;i++) {
-            List<View> lineViews=listLineView.get(i);
-            UtilsLog.log("zhm","i=="+i+"==lineviews=="+lineViews.size());
-            for (int j=0;j<lineViews.size();j++) {
-                View view=lineViews.get(j);
-                UtilsLog.log("zhm","j=="+j);
-                MarginLayoutParams marginLayoutParams= (MarginLayoutParams) view.getLayoutParams();
-                left=curLeft+marginLayoutParams.leftMargin;
-                top=curTop+marginLayoutParams.topMargin;
-                right=left+view.getMeasuredWidth();
-                bottom=top+view.getMeasuredHeight();
-                view.layout(left,top,right,bottom);
-                curLeft+=view.getMeasuredWidth()+marginLayoutParams.leftMargin+marginLayoutParams.rightMargin;
-                UtilsLog.log("zhm","left="+left+"=top="+top+"=right="+right+"=bottom="+bottom+"==curLeft=="+curLeft);
+        int startX=getPaddingLeft();
+        int startY=getPaddingTop();
+        int measuredWidth=getMeasuredWidth();
+        int measuredHeight=getMeasuredHeight();
+        //每个子控件占据的宽度
+        int childViewUserWidth=0;
+        int childViewUserLineHeight=0;
+        int childCount=getChildCount();
+        for (int i=0;i<childCount;i++) {
+            View view=getChildAt(i);
+            if (view.getVisibility()==GONE) {
+                continue;
             }
-            curLeft=0;
-            curTop+=listLineHeight.get(i);
-            UtilsLog.log("zhm","curTop=="+curTop);
+            //获取每个子控件的margin
+            MarginLayoutParams params= (MarginLayoutParams) view.getLayoutParams();
+            int childViewMeasuredWidth=view.getMeasuredWidth();
+            int childViewMeasuredHeight=view.getMeasuredHeight();
+
+            childViewUserWidth=childViewMeasuredWidth+params.leftMargin+params.rightMargin;
+            if (startX+childViewUserWidth>measuredWidth-getPaddingRight()) {
+                startX=getPaddingLeft();
+                startY+=childViewUserLineHeight;
+            }
+            left=startX+params.leftMargin;
+            top=startY+params.topMargin;
+            right=left+childViewMeasuredWidth;
+            bottom=top+childViewMeasuredHeight;
+            view.layout(left,top,right,bottom);
+            startX+=childViewUserWidth;
+            childViewUserLineHeight=Math.max(childViewUserLineHeight,childViewMeasuredHeight+params.bottomMargin);
         }
-        listLineView.clear();
-        listLineHeight.clear();
 
     }
 
@@ -67,9 +74,6 @@ public class WaterFlowLayout extends ViewGroup {
         return new MarginLayoutParams(getContext(),attrs);
     }
 
-    List<Integer> listLineHeight=new ArrayList<>();
-    List<View> listView=new ArrayList<>();
-    List<List<View>> listLineView=new ArrayList<>();//<一行view>的集合
 
     //onMeasure 走了两遍
     @Override
@@ -101,6 +105,7 @@ public class WaterFlowLayout extends ViewGroup {
                 UtilsLog.log("zhm","i=="+i);
             //当前行宽、当前行高
                 View child=getChildAt(i);
+                //测量自己
                 measureChild(child,widthMeasureSpec,heightMeasureSpec);
 
                 //当前margin
@@ -115,30 +120,22 @@ public class WaterFlowLayout extends ViewGroup {
                     measureWidth = Math.max(measureWidth, ichildWidth);
                     measureHeight += ichildHeight;
                     UtilsLog.log("zhm","measureWidth==="+measureWidth+"===measureHeight==="+measureHeight);
-                    listLineHeight.add(ichildHeight);
-                    listLineView.add(listView);
-                    UtilsLog.log("zhm","listlineview.size=="+listLineView.size());
                     //更新新的行信息
                     iCurWidth = measureWidth;
                     iCurHeight = ichildHeight;
                     UtilsLog.log("zhm","iCurWidth=="+iCurWidth+"==iCurHeight=="+iCurHeight);
                     //更新后需要将行view复位
-                    listView=new ArrayList<>();
-                    listView.add(child);
                     //记录新行信息
                 } else {
                     iCurWidth+=ichildWidth;
                     iCurHeight=Math.max(iCurHeight,ichildHeight);
                     measureWidth=iCurWidth;
                     measureHeight=iCurHeight;
-                    listView.add(child);
                     UtilsLog.log("zhm","else中iCurWidth=="+iCurWidth+"==iCurHeight=="+iCurHeight);
                 }
                 if (i==childCount-1) {
                     measureWidth=Math.max(measureWidth,iCurWidth);
                     measureHeight+=iCurHeight;
-                    listLineView.add(listView);
-                    listLineHeight.add(iCurHeight);
                 }
             }
         }
