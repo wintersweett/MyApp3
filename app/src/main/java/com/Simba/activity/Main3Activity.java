@@ -40,19 +40,15 @@ public class Main3Activity extends Activity implements AdvancedUIAdapter.ItemCli
     }
 
     private void initData() {
-        String [] str={"跳转到流式","线性渲染","雷达"};
+        String [] str={"跳转到流式","线性渲染","雷达","水波纹","填满心"};
         //要跳转到的自定义view
         list=new ArrayList<>();
-        AdvanceduiEntity a=new AdvanceduiEntity();
-        a.to=str[0];
-        list.add(a);
+        for (int i=0;i<str.length;i++) {
+            AdvanceduiEntity entity=new AdvanceduiEntity();
+            entity.to=str[i];
+            list.add(entity);
+        }
 
-        AdvanceduiEntity b=new AdvanceduiEntity();
-        b.to=str[1];
-        list.add(b);
-        AdvanceduiEntity c=new AdvanceduiEntity();
-        c.to=str[2];
-        list.add(c);
         UtilsLog.log("zhm","listsize=="+list.size());
         uiAdapter=new AdvancedUIAdapter(this,list);
         lv.setAdapter(uiAdapter);

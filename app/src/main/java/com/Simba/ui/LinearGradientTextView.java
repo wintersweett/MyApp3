@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.Simba.Utils.UtilsLog;
 
-/**
+/**线性渲染
  * 类似跑马灯、霓虹灯效果，个别字循环高亮展示
  */
 

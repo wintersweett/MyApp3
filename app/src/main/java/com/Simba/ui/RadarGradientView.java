@@ -12,19 +12,23 @@ import android.view.View;
 
 import com.Simba.Utils.UtilsLog;
 
+/**梯度渲染
+ * 类似雷达样效果
+ */
+
 public class RadarGradientView extends View {
-    private final Runnable run=new Runnable() {
+    private  Runnable run=new Runnable() {
         @Override
         public void run() {
+            UtilsLog.log("zhm","run()");
             scanAngle=(scanAngle+scanSpeed)%360;
             matrix.postRotate(scanSpeed,width/2,height/2);//旋转矩阵
             invalidate();//通知view重绘
             postDelayed(run,50);//调用自身，重复绘制
-
         }
     };
     int scanAngle;//扫描旋转的角度
-    int scanSpeed;//扫描的速度
+    int scanSpeed=5;//扫描的速度
     Matrix matrix=new Matrix();//旋转需要的矩阵
 
     Paint mPaint;//画圆用的画笔
@@ -33,10 +37,15 @@ public class RadarGradientView extends View {
     SweepGradient sweepGradient;
     public RadarGradientView(Context context) {
         super(context);
+        UtilsLog.log("zhm","一个参数");
+        setWillNotDraw(false);
         mPaint=new Paint();
+        mPaint.setStrokeWidth(10);
+        mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setAlpha(100);
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.BLACK);
+        mPaint.setColor(Color.parseColor("#B0C4DE"));
+
         scanPaint=new Paint();
         scanPaint.setAntiAlias(true);
         scanPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -46,25 +55,25 @@ public class RadarGradientView extends View {
 
     public RadarGradientView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        UtilsLog.log("zhm","2个参数");
     }
 
     public RadarGradientView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        UtilsLog.log("zhm","3个参数");
     }
 
-    public RadarGradientView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
     int height=0;
     int width=0;
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        UtilsLog.log("zhm","onMeasure");
-        height=getMeasuredHeight();
-        width=getMeasuredWidth();
+        height=MeasureSpec.getSize(heightMeasureSpec);
+        width=MeasureSpec.getSize(widthMeasureSpec);
         height=width=Math.min(height,width);
+        UtilsLog.log("zhm","onMeasure=="+"height=="+height+"==width=="+width);
+        setMeasuredDimension(width,height);
     }
 
     @Override
@@ -80,7 +89,6 @@ public class RadarGradientView extends View {
         scanPaint.setShader(sweepGradient);
         canvas.concat(matrix);
         canvas.drawCircle(width/2,height/2,width*pots[4],scanPaint);
-       // postInvalidateDelayed(50);
         canvas.restore();
 
     }
