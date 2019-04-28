@@ -1,4 +1,4 @@
-package ui;
+package com.Simba.ui;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.Simba.Utils.UtilsLog;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 不规则控件进行流式

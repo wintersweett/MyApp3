@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <com.Simba.ui.LinearGradientTextView
+        android:textSize="30sp"
+        android:textColor="#666666"
+        android:layout_gravity="center"
+        android:text="我是谁你欢迎欢迎来了来了"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
