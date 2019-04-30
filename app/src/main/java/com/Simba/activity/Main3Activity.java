@@ -40,7 +40,7 @@ public class Main3Activity extends Activity implements AdvancedUIAdapter.ItemCli
     }
 
     private void initData() {
-        String [] str={"跳转到流式","线性渲染","雷达","水波纹","填满心"};
+        String [] str={"跳转到流式","线性渲染","雷达","水波纹","填满心","滤镜","滤镜2"};
         //要跳转到的自定义view
         list=new ArrayList<>();
         for (int i=0;i<str.length;i++) {

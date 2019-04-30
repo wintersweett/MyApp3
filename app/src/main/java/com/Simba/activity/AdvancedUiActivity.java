@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.Simba.ui.FilterView;
+import com.Simba.ui.FilterView2;
 import com.Simba.ui.MyGradient;
 import com.Simba.ui.RadarGradientView;
 import com.Simba.ui.ZoomImageView;
@@ -27,6 +29,10 @@ public class AdvancedUiActivity extends AppCompatActivity {
 
         } else if ("水波纹".equals(to)) {
             setContentView(new ZoomImageView(this));
+        } else if ("滤镜".equals(to)) {
+            setContentView(new FilterView(this));
+        } else if ("滤镜2".equals(to)) {
+            setContentView(new FilterView2(this));
         }
 
     }
