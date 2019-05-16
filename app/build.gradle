@@ -33,5 +33,4 @@ dependencies {
     if (!moduleB.toBoolean()) {
         implementation project(':module2')
     }
-    implementation project(':pluginlib')
 }

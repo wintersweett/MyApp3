@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.Simba.ui.FilterView;
 import com.Simba.ui.FilterView2;
+import com.Simba.ui.GuaguacardView;
+import com.Simba.ui.IregularWaveView;
 import com.Simba.ui.MyGradient;
 import com.Simba.ui.RadarGradientView;
 import com.Simba.ui.ZoomImageView;
@@ -33,6 +35,10 @@ public class AdvancedUiActivity extends AppCompatActivity {
             setContentView(new FilterView(this));
         } else if ("滤镜2".equals(to)) {
             setContentView(new FilterView2(this));
+        } else if ("波浪".equals(to)) {
+            setContentView(new IregularWaveView(this));
+        } else if ("刮刮卡".equals(to)) {
+            setContentView(new GuaguacardView(this));
         }
 
     }
